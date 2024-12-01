@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { CircleDollarSign, ShieldCheck, BadgeCheck, ChevronRight, Star, Code, LineChart, PenTool } from 'lucide-react';
 import Navbar from '../components/common/Navbar';
 
@@ -12,7 +12,54 @@ const ServiceCardPlaceholder = ({ icon: Icon, color }) => (
   </div>
 );
 
+const Preloader = () => (
+  <div className="fixed inset-0 bg-white z-50 flex items-center justify-center">
+    <div className="relative">
+      <svg
+        className="w-32 h-32 animate-spin"
+        viewBox="0 0 100 100"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle
+          cx="50"
+          cy="50"
+          r="45"
+          fill="none"
+          stroke="#E5E7EB"
+          strokeWidth="8"
+        />
+        <circle
+          cx="50"
+          cy="50"
+          r="45"
+          fill="none"
+          stroke="#22C55E"
+          strokeWidth="8"
+          strokeLinecap="round"
+          strokeDasharray="70"
+          strokeDashoffset="0"
+          className="transform origin-center"
+        />
+      </svg>
+      <div className="absolute inset-0 flex items-center justify-center">
+        <span className="text-xl font-bold text-green-600">Tasks Zetu</span>
+      </div>
+    </div>
+  </div>
+);
+
 function Home() {
+  const [loading, setLoading] = useState(true);
+  
+  useEffect(() => {
+    // Simulate loading time
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+    
+    return () => clearTimeout(timer);
+  }, []);
+
   const services = [
     {
       title: 'Web Development',
@@ -36,6 +83,10 @@ function Home() {
       price: 'From KSH 5,000'
     }
   ];
+
+  if (loading) {
+    return <Preloader />;
+  }
 
   return (
     <>
