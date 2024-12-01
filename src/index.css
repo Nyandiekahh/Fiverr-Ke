@@ -22,3 +22,20 @@
       }
     }
   }
+
+  @media (max-width: 768px) {
+    nav .md\\:hidden {
+      display: block;
+    }
+    nav .md\\:flex {
+      flex-direction: column;
+      gap: 10px;
+    }
+    nav .hidden {
+      display: none;
+    }
+    nav .flex {
+      display: flex;
+    }
+  }
+  
